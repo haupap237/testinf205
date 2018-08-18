@@ -1,0 +1,42 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="default" extends="struts-default">
+        <action name="login" class="sample.strust2.LoginAction" method="login">
+            <result name="input">index.jsp</result>
+            <result name="success">welcome.jsp</result>
+            <result name="fail">fail.jsp</result>
+            
+            
+            
+        </action>
+        <action name="searchLikeLastname" class="sample.strust2.SearchLikeAction">
+            <result name="success">show.jsp</result>
+        </action>
+        <action name="deleteAccount" class="sample.strust2.DeleteAccountAction">
+            <result name="success" type="chain">searchLikeLastname</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+        <action name="insertAccount" class="sample.strust2.RegisterAccount">
+            <interceptor-ref name="params"/>
+            <interceptor-ref name="validation"/>
+            <interceptor-ref name="workflow"/>
+            
+            <result name="success">index.jsp</result>
+            <result name="fail">fail.jsp</result>
+            <result name="input">register.jsp</result>
+        </action>
+        
+        <action name="updateAccount" class="sample.strust2.UpdateAccountAction" method="update">
+            <result name="success" type="chain">searchLikeLastname</result>
+            <result name="fail">fail.jsp</result>
+        </action>
+      
+            
+            
+        
+            
+    </package>
+</struts>
